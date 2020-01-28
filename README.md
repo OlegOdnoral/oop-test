@@ -76,3 +76,7 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Generate angular project with defined test runners
+
+`nx g @nrwl/angular:application user-interface --unit-test-runner=jest --e2e-test-runner=protractor`

@@ -10,5 +10,13 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "user-interface": {
+      "tags": []
+    },
+    "user-interface-e2e": {
+      "tags": [],
+      "implicitDependencies": ["user-interface"]
+    }
+  }
 }

@@ -1,8 +1,130 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "user-interface": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/user-interface",
+      "sourceRoot": "apps/user-interface/src",
+      "prefix": "oop-test",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/user-interface",
+            "index": "apps/user-interface/src/index.html",
+            "main": "apps/user-interface/src/main.ts",
+            "polyfills": "apps/user-interface/src/polyfills.ts",
+            "tsConfig": "apps/user-interface/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/user-interface/src/favicon.ico",
+              "apps/user-interface/src/assets"
+            ],
+            "styles": ["apps/user-interface/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/user-interface/src/environments/environment.ts",
+                  "with": "apps/user-interface/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "user-interface:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "user-interface:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "user-interface:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/user-interface/tsconfig.app.json",
+              "apps/user-interface/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/user-interface/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/user-interface/jest.config.js",
+            "tsConfig": "apps/user-interface/tsconfig.spec.json",
+            "setupFile": "apps/user-interface/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "user-interface-e2e": {
+      "root": "apps/user-interface-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/user-interface-e2e/protractor.conf.js",
+            "devServerTarget": "user-interface:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "user-interface:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/user-interface-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/user-interface-e2e/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/angular"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -55,6 +177,14 @@
       "application": {
         "linter": "eslint"
       }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "protractor"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
     }
-  }
+  },
+  "defaultProject": "user-interface"
 }
