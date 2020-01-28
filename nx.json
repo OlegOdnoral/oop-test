@@ -17,6 +17,9 @@
     "user-interface-e2e": {
       "tags": [],
       "implicitDependencies": ["user-interface"]
+    },
+    "user-api-server": {
+      "tags": []
     }
   }
 }
