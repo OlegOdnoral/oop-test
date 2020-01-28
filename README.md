@@ -6,6 +6,8 @@ This project was generated using [Nx](https://nx.dev).
 
 🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
+[![Known Vulnerabilities](https://snyk.io/test/github/OlegOdnoral/oop-test/badge.svg?targetFile=package.json)](https://snyk.io/test/github/OlegOdnoral/oop-test?targetFile=package.json)
+
 ## Adding capabilities to your workspace
 
 Nx supports many plugins which add capabilities for developing different types of applications and different tools.
